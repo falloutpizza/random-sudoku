@@ -1,0 +1,117 @@
+.dark-mode {
+    /* Dark mode variables */
+    --background: #15151a;
+    --text: #e2e2e4;
+    --primary: #14ccff;
+    --secondary: #1e1e35;
+}
+
+.light-mode {
+    --background: #FFFCFC;
+    --text: #15151a;
+    --primary: #08b2e3;
+    --secondary: #cbf2fc;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--text);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    transition: 0.3s ease-in-out;
+
+}
+
+.heading {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin: 5px auto 25px auto;
+    text-align: center;
+    justify-self: center;
+}
+
+.toggle-dark-mode {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    position: absolute;
+    margin: 10px 15px 10px 15px;
+}
+
+.toggle-dark-mode:hover {
+    cursor: pointer;
+}
+
+.sun-body {
+    height: 100%;
+    width: 100%;
+    background-color: rgb(255, 204, 51);
+    border-radius: 50%;
+    position: absolute;
+    transition: 0.3s ease-in-out;
+}
+
+.sun-cover-active {
+    background-color: rgb(253, 255, 239);
+}
+
+.moon-cover {
+    height: 0;
+    width: 0;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+    background-color: var(--background);
+    transition: 0.3s ease-in-out;
+}
+
+.moon-cover-active {
+    height: 70%;
+    width: 70%;
+}
+
+.main-grid {
+    height: 450px;
+    width: 450px;
+    margin: auto 10px auto 150px;
+    outline: 5px solid var(--text);
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.three-by-three-grid {
+    height: 150px;
+    width: 150px;
+    outline: 2px solid var(--text);
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.three-by-three-grid:nth-of-type(2n) {
+    background-color: var(--secondary);
+}
+
+.number-grid {
+    height: 50px;
+    width: 50px;
+    border: 1px solid var(--text);
+}
+
+.numpad-row {
+    display: flex;
+    width: 225px;
+    margin: 20px 0;
+    justify-content: space-between;
+}
+
+.number {
+    background-color: var(--secondary);
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 50px;
+}
