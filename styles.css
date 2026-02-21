@@ -147,6 +147,12 @@ h1 {
     height: 50px;
     width: 50px;
     border: 1px solid var(--text);
+    text-align: center;
+    line-height: 50px;
+}
+
+.numpad {
+    width: fit-content;
 }
 
 .numpad-row {
@@ -164,4 +170,46 @@ h1 {
     text-align: center;
     line-height: 50px;
     border: 2px solid var(--text);
+    transition: 0.3s;
+}
+
+.number:hover {
+    filter: drop-shadow(3px 3px 0 #000000);
+}
+
+.number-selected {
+    background-color: var(--primary);
+}
+
+.number-pencil-marking {
+    border: 2px dashed var(--text);
+}
+
+.pencil-markings {
+    height: 40px;
+    width: 80px;
+    background-color: var(--background);
+    border: 2px solid var(--text);
+    border-radius: 20px;
+    margin: auto;
+    transition: 0.3s;
+
+}
+
+.slider {
+    height: 90%;
+    aspect-ratio: 1/1;
+    margin: 2px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.slider-enabled {
+    transform: translateX(39.5px);
+}
+
+.slider-enabled-bg {
+    background-color: var(--secondary);
+    border: 2px dashed var(--text);
 }
