@@ -1,3 +1,28 @@
+function intialiseBoard(boardArray) {
+    //format of boardArray:
+    //[ [x x x x x x x x x ] * 9]
+    // each row will represent one sudoku row
+    // "" will represent an unfilled box
+    let curRowElements
+    let rows = [];
+    for (let i = 1; i < 10; i++) {
+        curRowElements = document.getElementsByClassName(`row-${i}`);
+        rows.push(curRowElements);
+    }
+
+    for (let i = 0; i < 9; i++) { //for looping through rows
+        for (let j = 0; j < 9; j++) { //for looping through columns
+            if (boardArray[i][j] !== "") {
+                rows[i][j].innerText = boardArray[i][j].toString();
+                rows[i][j].classList.add("occupied")
+            }
+        }
+    }
+}
+
+
+
+
 //dark mode controls
 
 const toggleDarkMode = document.querySelector("#toggle-dark-mode");
@@ -52,24 +77,25 @@ for (let i = 0; i < numbers.length; i++) {
 //placing numbers
 const numGrid = document.querySelectorAll(".number-grid")
 for (let i = 0; i < numGrid.length; i++) {
-    numGrid[i].addEventListener("click", function () {
-        if (!pencilEnabled) {
-            if (curNum === numGrid[i].innerText) {
-                numGrid[i].innerText = ""
-            } else if (curNum !== "") {
-                numGrid[i].innerText = curNum;
-            }
-        } else {
-            let pencilMarks = numGrid[i].children[0].innerText
-            if (pencilMarks.includes(curNum)) {
-
-                let newList = pencilMarks.slice(0, pencilMarks.indexOf(curNum));
-                newList = newList + pencilMarks.slice(pencilMarks.indexOf(curNum) + 1, pencilMarks.length);
-                numGrid[i].children[0].innerText = newList;
+    if (!numGrid[i].classList.contains("occupied")) {
+        numGrid[i].addEventListener("click", function () {
+            if (!pencilEnabled) {
+                if (curNum === numGrid[i].innerText) {
+                    numGrid[i].innerText = ""
+                } else if (curNum !== "") {
+                    numGrid[i].innerText = curNum;
+                }
             } else {
-                numGrid[i].children[0].innerText += curNum;
-            }
+                let pencilMarks = numGrid[i].children[0].innerText
+                if (pencilMarks.includes(curNum)) {
 
-        }
-    })
+                    let newList = pencilMarks.slice(0, pencilMarks.indexOf(curNum));
+                    newList = newList + pencilMarks.slice(pencilMarks.indexOf(curNum) + 1, pencilMarks.length);
+                    numGrid[i].children[0].innerText = newList;
+                } else {
+                    numGrid[i].children[0].innerText += curNum;
+                }
+            }
+        })
+    }
 }

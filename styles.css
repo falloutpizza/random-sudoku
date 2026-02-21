@@ -1,9 +1,9 @@
 .dark-mode {
     /* Dark mode variables */
     --background: #15151a;
-    --text: #e2e2e4;
+    --text: #7ab2bd;
     --primary: #14ccff;
-    --secondary: #1e1e35;
+    --secondary: #2e2e56;
 }
 
 .light-mode {
@@ -18,7 +18,6 @@ body {
     color: var(--text);
     font-family: Georgia, 'Times New Roman', Times, serif;
     transition: 0.3s ease-in-out;
-
 }
 
 .heading {
@@ -148,7 +147,7 @@ h1 {
     width: 50px;
     border: 1px solid var(--text);
     text-align: center;
-    line-height: 50px;
+    overflow-wrap: break-word;
 }
 
 .numpad {
