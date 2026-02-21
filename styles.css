@@ -34,9 +34,8 @@ h1 {
 }
 
 .toggle-dark-mode {
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
+    height: 50px;
+    width: 50px;
     position: absolute;
     margin: 10px 15px 10px 15px;
 }
@@ -45,32 +44,82 @@ h1 {
     cursor: pointer;
 }
 
-.sun-body {
-    height: 100%;
-    width: 100%;
-    background-color: rgb(255, 204, 51);
+.sun {
+    height: 45%;
+    width: 45%;
     border-radius: 50%;
+    background-color: rgb(255, 212, 55);
+    margin: 13.75px auto;
+    transition: transform 0.3s;
+}
+
+.sun-ray {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background-color: rgb(255, 212, 55);
     position: absolute;
-    transition: 0.3s ease-in-out;
+    transition: transform 0.3s;
 }
 
-.sun-cover-active {
-    background-color: rgb(253, 255, 239);
+.sun-ray:nth-of-type(1) {
+    transform: translate(6.75px, 25px);
 }
 
-.moon-cover {
-    height: 0;
-    width: 0;
-    border-radius: 50%;
-    position: relative;
-    z-index: 1;
+.sun-ray:nth-of-type(2) {
+    transform: translate(6.75px, -12.5px);
+}
+
+.sun-ray:nth-of-type(3) {
+    transform: translate(-12.5px, 5px);
+}
+
+.sun-ray:nth-of-type(4) {
+    transform: translate(25px, 5px);
+}
+
+.sun-ray:nth-of-type(5) {
+    transform: translate(-7px, 20px);
+}
+
+.sun-ray:nth-of-type(6) {
+    transform: translate(-7px, -8px);
+}
+
+.sun-ray:nth-of-type(7) {
+    transform: translate(20px, -8px);
+}
+
+.sun-ray:nth-of-type(8) {
+    transform: translate(20px, 20px);
+}
+
+
+.sun-ray-cover-active:nth-of-type(1n) {
+    transform: translate(6.75px, 6.75px);
     background-color: var(--background);
-    transition: 0.3s ease-in-out;
 }
 
-.moon-cover-active {
+.sun-inactive {
+    background-color: var(--background);
     height: 70%;
     width: 70%;
+    transform: translate(-10px, -10px);
+}
+
+.moon {
+    height: 100%;
+    width: 100%;
+    background-color: var(--background);
+    border-radius: 50%;
+    display: inline-block;
+    transition: all 0.3s 0.3s;
+}
+
+.moon-active {
+    height: 100%;
+    width: 100%;
+    background-color: rgb(244, 244, 224);
 }
 
 .main-grid {
@@ -114,4 +163,5 @@ h1 {
     border-radius: 50%;
     text-align: center;
     line-height: 50px;
+    border: 2px solid var(--text);
 }
