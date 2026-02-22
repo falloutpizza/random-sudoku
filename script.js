@@ -66,7 +66,7 @@ function placeNumNumbersFirst() {
                         alert("congrats, puzzle solved!")
                     }
                 } else if (!pencilEnabled && !correct) {
-                    alert("oops! wrong thing!");
+                    alert("oops! this doesn't belong here!");
                 } else {
                     let pencilMarks = numGrid[i].children[0].innerText
                     if (pencilMarks.includes(curNum)) {
