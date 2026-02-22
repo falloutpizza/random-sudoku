@@ -18,6 +18,12 @@ body {
     color: var(--text);
     font-family: Georgia, 'Times New Roman', Times, serif;
     transition: 0.3s ease-in-out;
+    font-size: 1.3rem;
+}
+
+sup {
+    font-size: 0.8rem;
+    font-weight: 100;
 }
 
 .heading {
