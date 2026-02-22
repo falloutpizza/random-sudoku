@@ -1,17 +1,18 @@
 //list of variables used in multiple places
 let curNum = ""
 let pencilEnabled = false
+let numInputs = [0, 0]
 const slider = document.querySelector(".pencil-markings");
 const numbers = document.querySelectorAll(".number");
 const toggleDarkMode = document.querySelector("#toggle-dark-mode");
 const numGrid = document.querySelectorAll(".number-grid")
 
 //initialising board
-function intialiseBoard(boardArray) {
+function intialiseBoard(boardArray, solutionArray) {
     //format of boardArray:
     //[ [x x x x x x x x x ] * 9]
     // each row will represent one sudoku row
-    // "" will represent an unfilled box
+    // 0 will represent an unfilled box
     let curRowElements
     let rows = [];
     for (let i = 1; i < 10; i++) {
@@ -21,9 +22,12 @@ function intialiseBoard(boardArray) {
 
     for (let i = 0; i < 9; i++) { //for looping through rows
         for (let j = 0; j < 9; j++) { //for looping through columns
-            if (boardArray[i][j] !== "") {
+            if (boardArray[i][j] !== 0) {
                 rows[i][j].innerText = boardArray[i][j].toString();
                 rows[i][j].classList.add("occupied")
+            } else {
+                rows[i][j].classList.add(`col-${j + 1}-val-${solutionArray[i][j]}`)
+                numInputs[1]++
             }
         }
     }
@@ -48,21 +52,21 @@ function selectNumberThenGrid() {
     };
 }
 
-function selectGridThenNumber() {
-
-}
-
 //placing numbers
 function placeNumNumbersFirst() {
     for (let i = 0; i < numGrid.length; i++) {
-        if (!numGrid[i].classList.contains("occupied")) {
-            numGrid[i].addEventListener("click", function () {
-                if (!pencilEnabled) {
-                    if (curNum === numGrid[i].innerText) {
-                        numGrid[i].innerText = ""
-                    } else if (curNum !== "") {
-                        numGrid[i].innerText = curNum;
+        numGrid[i].addEventListener("click", function () {
+            if (this.classList.contains("occupied") === false) {
+                const correct = checkNumPlacement(this.classList[1], this.classList[2]);
+                if (!pencilEnabled && correct) {
+                    numGrid[i].innerText = curNum;
+                    numInputs[0]++;
+                    numGrid[i].classList.add("occupied");
+                    if (numInputs[0] === numInputs[1] && numInputs[0] !== 0) {
+                        alert("congrats, puzzle solved!")
                     }
+                } else if (!pencilEnabled && !correct) {
+                    alert("oops! wrong thing!");
                 } else {
                     let pencilMarks = numGrid[i].children[0].innerText
                     if (pencilMarks.includes(curNum)) {
@@ -74,13 +78,19 @@ function placeNumNumbersFirst() {
                         numGrid[i].children[0].innerText += curNum;
                     }
                 }
-            })
-        }
+            }
+        })
+
     }
 }
 
-function placeNumGridFirst() {
-
+//checking if number is correctly placed
+function checkNumPlacement(rowClass, colClass) {
+    //format: "row-x", "col-x-val-y"
+    const row = parseInt(rowClass[4]);
+    const col = parseInt(colClass[4]);
+    const val = parseInt(colClass[10]);
+    return (curNum == val)
 }
 
 
@@ -118,14 +128,25 @@ pencilMarkings()
 
 //getting daily sudoku
 async function getDailySudoku() {
-    const sudokuData = await axios.get("https://sudoku-api.vercel.app/api/dosuku?difficulty=medium")
-    const puzzleGrid = (sudokuData.data.newboard.grids[0].value);
-    const solutionGrid = sudokuData.data.newboard.grids[0].solution;
+    try {
+        const sudokuData = await axios.get("https://sudoku-api.vercel.app/api/dosuku?difficulty=easy")
+        console.log(sudokuData.data.newboard.grids[0].difficulty)
+        let sudoku = sudokuData.data.newboard.grids[0];
+        return sudoku;
+    } catch {
+        alert("sorry, some error occured :(")
+    }
 }
 
-getDailySudoku();
+async function init() {
+    let sudoku = await getDailySudoku();
+    intialiseBoard(sudoku.value, sudoku.solution);
 
+}
+
+init();
 
 //calling functions that are set
-selectNumberThenGrid()
-placeNumNumbersFirst()
+selectNumberThenGrid();
+placeNumNumbersFirst();
+
