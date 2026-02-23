@@ -136,6 +136,14 @@ h1 {
     flex-wrap: wrap;
 }
 
+@media (max-width:576px) {
+
+    .main-grid,
+    .main-controls-section {
+        margin: auto;
+    }
+}
+
 .three-by-three-grid {
     height: 150px;
     width: 150px;
